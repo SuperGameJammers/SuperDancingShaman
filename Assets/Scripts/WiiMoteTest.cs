@@ -6,18 +6,18 @@ using WiimoteApi.Util;
 public class WiiMoteTest : MonoBehaviour
 {
 	private Wiimote wiimote = null;
-	private Vector2 accelerations;
+	private Vector2 accelerations, oldAccelerations, velocity;
 	public long timesPerSecond = 5;
+	public decimal movementThreshold = 0.5m;
 	private float lastUpdate;
-	public Rigidbody2D shape;
 	private float[] gravity = new float[3];
 
 	enum Direction
 	{
-		up,
-		down,
-		left,
-		right}
+		up = 0,
+		down = 1,
+		left = 2,
+		right = 3}
 
 	;
 	// Use this for initialization
@@ -46,7 +46,6 @@ public class WiiMoteTest : MonoBehaviour
 
 	void updateWiiMote ()
 	{
-		float angle; 
 
 
 		wiimote = WiimoteManager.Wiimotes [0];
@@ -56,11 +55,11 @@ public class WiiMoteTest : MonoBehaviour
 		int ret;
 		do {
 			ret = wiimote.ReadWiimoteData ();
+			oldAccelerations = accelerations;
 			accelerations = getAccelerationVector ();
-			angle = getAngle (accelerations);
-			shape.MoveRotation (angle * Time.deltaTime);
 
-			int direction = (isMoving (accelerations)) ? (int)getDirection (accelerations) : 0;
+			velocity = calculateVelocity (oldAccelerations, accelerations);
+			int direction = (isMoving (velocity)) ? (int)getDirection (velocity) : 5;
 			Debug.Log (direction);
 			if (wiimote.Button.a) {
 
@@ -75,19 +74,25 @@ public class WiiMoteTest : MonoBehaviour
 		} while (ret > 0);
 	}
 
+	Vector2 calculateVelocity (Vector2 old, Vector2 current)
+	{
+		float timeSinceUpdate = (timesPerSecond / 1);
+
+		return (current - old) * timeSinceUpdate;
+	}
+
 	bool isMoving (Vector2 accValues)
 	{
-		decimal x = decimal.Round ((decimal)accValues.x);
-		decimal y = decimal.Round ((decimal)accValues.y);
-
-		return ((x > (decimal)0.5 || x < -(decimal)0.5) || (y > (decimal)0.5 || y < -(decimal)0.5));
+		decimal x = (decimal)accValues.x;
+		decimal y = (decimal)accValues.y;
+		return ((x > movementThreshold || x < -movementThreshold) || (y > movementThreshold || y < -movementThreshold));
 	}
 
 	Direction getDirection (Vector2 accValues)
 	{
-		decimal x = decimal.Round ((decimal)accValues.x);
-		decimal y = decimal.Round ((decimal)accValues.y);
-		if (y > x) {
+		decimal x = ((decimal)accValues.x);
+		decimal y = ((decimal)accValues.y);
+		if (Mathf.Abs (accValues.y) > Mathf.Abs (accValues.x)) {
 			if (y < 0)
 				return Direction.up;
 			else
@@ -110,8 +115,8 @@ public class WiiMoteTest : MonoBehaviour
 		float[] accValues = wiimote.Accel.GetCalibratedAccelData ();
 
 		accel_x = accValues [0];
-		accel_y = -accValues [2];
-		accel_z = -accValues [1];
+		accel_y = -accValues [1];
+		accel_z = -accValues [2];
 		return new Vector3 (accel_x, accel_y, accel_z);
 	}
 
@@ -121,18 +126,7 @@ public class WiiMoteTest : MonoBehaviour
 		return Mathf.Rad2Deg * angle;
 	}
 
-	Vector2 smoothenValues (float[] values)
-	{
 
-		float alpha = 0.8f;
-
-		gravity [0] = alpha * gravity [0] + (1 - alpha) * values [0];
-		gravity [1] = alpha * gravity [1] + (1 - alpha) * values [1];
-
-		values [0] = values [0] - gravity [0];
-		values [1] = values [1] - gravity [1];
-		return new Vector2 (values [0], values [1]);
-	}
 
 	Vector2 getAccelerationVector ()
 	{
@@ -142,7 +136,7 @@ public class WiiMoteTest : MonoBehaviour
 		accel_x = accValues [0];
 		accel_y = -accValues [2];
 
-		return smoothenValues (new float[2] { accel_x, accel_y });
+		return  new Vector2 (accel_x, accel_y);
 	}
 
 	void OnApplicationQuit ()
