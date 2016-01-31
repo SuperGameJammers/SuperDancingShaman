@@ -348,7 +348,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &87716621
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1334,7 +1334,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &317475606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3649,11 +3649,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Conejo
-
-    Neko
-
-    Mike(UI)'
+  m_Text: "Antonio Pedraza\nNeko (+M\xFAsica)\nMiguel Riego"
 --- !u!222 &799117802
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3742,7 +3738,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &853932230
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3836,13 +3832,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Zura Guerra
-
-    Dan AMADOR
-
-    Gus
-
-    Roberto'
+  m_Text: "Zura Guerra\nDan Amador\nGustavo Garc\xEDa \nRoberto Ortiz"
 --- !u!222 &893886636
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5363,7 +5353,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1435656075
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5529,10 +5519,9 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 21300000, guid: 2bb27dabf76613e4d879c93054db4deb,
-      type: 3}
+    m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 21300000, guid: bb1f42dd7ee68004ca433c352b7dc1c6, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -5880,7 +5869,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1499949010
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6545,7 +6534,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1640819653
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7326,7 +7315,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1919479169
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7536,7 +7525,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1952155950
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8117,14 +8106,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0.92647076, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 628e13d2e1c4db545b925d4bde277536, type: 3}
+  m_Sprite: {fileID: 21300000, guid: bb1f42dd7ee68004ca433c352b7dc1c6, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -8158,7 +8147,7 @@ MonoBehaviour:
           m_MethodName: set_sprite
           m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 21300000, guid: 628e13d2e1c4db545b925d4bde277536,
+            m_ObjectArgument: {fileID: 21300000, guid: bb1f42dd7ee68004ca433c352b7dc1c6,
               type: 3}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Sprite, UnityEngine
             m_IntArgument: 0
