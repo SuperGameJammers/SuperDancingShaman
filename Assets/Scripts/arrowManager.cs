@@ -1,46 +1,41 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.UI;
 
 public class arrowManager: MonoBehaviour
 {
-	public GameObject arrow;
-	public Text remeaningText;
-
-	public Transform anchorPointArrow;
-	public int arrowsNumber;
+	public GameObject arrow;	
+	public Transform startPoint;
 
 
 	private GameObject arrowGenerated;
 	private int[] arrowRotation;
+	private KeyCode arrowDirection;
 
 
 	void Start ()
 	{
-		SV.remeaningArrows = arrowsNumber;
-		SV.streak = 0;
-
 		arrowRotation = new int[4];
 		int angle = 0;
 		for (int i = 1; i < arrowRotation.Length; i++)
 		{
 			angle += 90;
-			arrowRotation[i] = angle;
+			arrowRotation[i] = angle;			
 		}
 		generateArrow ();
 	}
 
 	void Update ()
 	{
-		if (Input.GetKeyDown (SV.arrowDirection))
+		if (Input.GetKeyDown (arrowDirection))
 		{
+			Debug.Log ("Bien hecho maldito");
 			arrowGenerated.GetComponent<Animator> ().SetBool ("delete", true);
 			Destroy (arrowGenerated, 0.5f);
-
-			SV.remeaningArrows--;
-			remeaningText.GetComponent<Text> ().text = SV.remeaningArrows + " More";
-
 			generateArrow ();
+		}
+		else if (Input.anyKeyDown)
+		{
+			Debug.Log ("Mal hecho");
 		}
 	}
 
@@ -48,22 +43,23 @@ public class arrowManager: MonoBehaviour
 	{
 		int randomRotation = Random.Range (0, 3);
 
-		arrowGenerated = Instantiate (arrow, anchorPointArrow.position, Quaternion.Euler (0, 0, arrowRotation[randomRotation])) as GameObject;
-
+		arrowGenerated= Instantiate (arrow, startPoint.position, Quaternion.Euler (0, 0, arrowRotation[randomRotation])) as GameObject;
+		
 		switch (randomRotation)
 		{
 			case 0:
-				SV.arrowDirection = KeyCode.UpArrow;
+				arrowDirection = KeyCode.UpArrow;
 				break;
 			case 1:
-				SV.arrowDirection = KeyCode.LeftArrow;
+				arrowDirection = KeyCode.LeftArrow;
 				break;
 			case 2:
-				SV.arrowDirection = KeyCode.DownArrow;
+				arrowDirection = KeyCode.DownArrow;
 				break;
 			case 3:
-				SV.arrowDirection = KeyCode.RightArrow;
+				arrowDirection = KeyCode.RightArrow;
 				break;
 		}
+
 	}
 }
