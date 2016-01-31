@@ -4,52 +4,58 @@ using UnityEngine.UI;
 
 public class arrowManager: MonoBehaviour
 {
-	public GameObject arrow;
-	public Text remeaningText;
+	public GameObject arrow;                    //Flecha
+	public Transform anchorPointArrow;          //Punto de generacion de la flecha
+	public Text remeaningText;                  //FLechas restantes
+	public int arrowsNumber;                    //NUmero de flechas
 
-	public Transform anchorPointArrow;
-	public int arrowsNumber;
 
-
-	private GameObject arrowGenerated;
-	private int[] arrowRotation;
+	private GameObject arrowGenerated;			//Flecha generada
+	private int[] arrowRotation;				//Matriz de rotaciones de la flehca
 
 
 	void Start ()
 	{
-		SV.remeaningArrows = arrowsNumber;
-		SV.streak = 0;
+		SV.remeaningArrows = arrowsNumber; //Establece el numero maximo de flechas
+		SV.combo = 0; //Resetea el combo
 
-		arrowRotation = new int[4];
-		int angle = 0;
+		arrowRotation = new int[4]; //Establece la longitud de la matriz de flechas
+		int angle = 0; //Angulo de rotacion de la flecha
+
+		//Recorre la matriz
 		for (int i = 1; i < arrowRotation.Length; i++)
 		{
-			angle += 90;
-			arrowRotation[i] = angle;
+			angle += 90; //Establece los posibles angulos
+			arrowRotation[i] = angle; //Establece el angulo para cada elemento
 		}
-		generateArrow ();
+
+		generateArrow (); //Genera una flecha
 	}
 
 	void Update ()
 	{
+		//Si se presiona la tecla correspondiente a la flecha
 		if (Input.GetKeyDown (SV.arrowDirection))
 		{
-			arrowGenerated.GetComponent<Animator> ().SetBool ("delete", true);
-			Destroy (arrowGenerated, 0.5f);
+			arrowGenerated.GetComponent<Animator> ().SetBool ("delete", true); //Activa la animacion
+			Destroy (arrowGenerated, 0.5f); //Destruye la flecha
 
-			SV.remeaningArrows--;
-			remeaningText.GetComponent<Text> ().text = SV.remeaningArrows + " More";
+			SV.remeaningArrows--; //Resta una flecha al total
+			remeaningText.GetComponent<Text> ().text = SV.remeaningArrows + " More"; //Muestra el numero de flechas restantes
 
-			generateArrow ();
+			generateArrow (); //Genera una flecha
 		}
 	}
 
+	//Se llama cuando se quiere generar una flecha
 	void generateArrow ()
 	{
-		int randomRotation = Random.Range (0, 3);
+		int randomRotation = Random.Range (0, 3); //Devuelve una rotacion aleatoria para la flecha
 
+		//Genera una flecha segun el numero dado
 		arrowGenerated = Instantiate (arrow, anchorPointArrow.position, Quaternion.Euler (0, 0, arrowRotation[randomRotation])) as GameObject;
 
+		//Devuelve el valor que tomara la tecla segun la flecha generada
 		switch (randomRotation)
 		{
 			case 0:

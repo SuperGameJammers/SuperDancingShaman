@@ -114,8 +114,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   arrow: {fileID: 155180, guid: c387c00f3bfd9624090d0849ccfe46d0, type: 2}
-  remeaningText: {fileID: 476491084}
   anchorPointArrow: {fileID: 2036640645}
+  remeaningText: {fileID: 476491084}
   arrowsNumber: 50
 --- !u!4 &174258092
 Transform:
